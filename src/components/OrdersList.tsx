@@ -1,8 +1,9 @@
 import React from 'react';
 import Order from './Order';
 import { IOrder } from '../models/order';
+import { IUser } from '../models/user';
 
-export default function OrdersList({ orders }: { orders: IOrder[] }) {
+export default function OrdersList({ orders, users }: { orders: IOrder[]; users: IUser[] }) {
     return (
         <table className="table table-hover">
             <thead>
@@ -18,7 +19,7 @@ export default function OrdersList({ orders }: { orders: IOrder[] }) {
             </thead>
             <tbody>
                 {orders.map(order => (
-                    <Order key={order.id} data={order} />
+                    <Order key={order.id} data={order} users={users} />
                 ))}
             </tbody>
         </table>

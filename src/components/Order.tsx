@@ -1,5 +1,6 @@
 import React from 'react';
 import { IOrder } from '../models/order';
+import { IUser } from '../models/user';
 
 function showDate(timestamp: string): string {
     const date = new Date(+timestamp * 1000);
@@ -20,15 +21,30 @@ function showCardNumber(cardNumber: string): string {
     return cardNumber.slice(0, 2) + '*'.repeat(numberSize - 6) + cardNumber.slice(-4);
 }
 
+function UserView({ userId, users }: { userId: number; users: IUser[] }) {
+    const user: IUser | undefined = users.find(({ id }) => id === userId);
+    return user ? (
+        <a href="#">
+            {user.gender === 'Male' ? 'Mr' : 'Ms'}. {user.first_name} {user.last_name}
+        </a>
+    ) : (
+        <s>Unknown User</s>
+    );
+}
+
 export default function Order({
-    data: { id, transaction_id, user_id, created_at, total, card_number, card_type, order_country, order_ip }
+    data: { id, transaction_id, user_id, created_at, total, card_number, card_type, order_country, order_ip },
+    users
 }: {
     data: IOrder;
+    users: IUser[];
 }) {
     return (
         <tr id={'order_' + id}>
             <th scope="row">{transaction_id}</th>
-            <td className="user_data">{user_id}</td>
+            <td className="user_data">
+                <UserView userId={user_id} users={users} />
+            </td>
             <td>{showDate(created_at)}</td>
             <td>${total}</td>
             <td>{showCardNumber(card_number)}</td>
