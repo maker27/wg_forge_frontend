@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useGlobalContext } from '../context';
-import { IUser } from '../models/user';
 import { showDate } from '../utils';
+import { IUser } from '../models/user';
 import { ICompany } from '../models/company';
 
 export default function UserView({
