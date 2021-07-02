@@ -1,9 +1,9 @@
 import React from 'react';
 import Order from './Order';
-import { IOrder } from '../models/order';
-import { IUser } from '../models/user';
+import { useGlobalContext } from '../context';
 
-export default function OrdersList({ orders, users }: { orders: IOrder[]; users: IUser[] }) {
+export default function OrdersList() {
+    const { orders } = useGlobalContext();
     return (
         <table className="table table-hover">
             <thead>
@@ -19,7 +19,7 @@ export default function OrdersList({ orders, users }: { orders: IOrder[]; users:
             </thead>
             <tbody>
                 {orders.map(order => (
-                    <Order key={order.id} data={order} users={users} />
+                    <Order key={order.id} data={order} />
                 ))}
             </tbody>
         </table>
