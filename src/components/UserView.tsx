@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { useGlobalContext } from '../context';
-import { showDate } from '../utils';
-import { IUser } from '../models/user';
-import { ICompany } from '../models/company';
+import { showDate, userFullName } from '../utils';
+import { IUser, ICompany } from '../models';
+import { MALE_GENDER } from '../assets/constants';
 
-export default function UserView({
-    user: { first_name, last_name, gender, birthday, avatar, company_id }
-}: {
-    user: IUser;
-}) {
+export default function UserView({ user }: { user: IUser }) {
     const { companies } = useGlobalContext();
+    const { gender, birthday, avatar, company_id } = user;
     const userCompany: ICompany | undefined = company_id
         ? companies.find(({ id }) => id === company_id)
         : undefined;
@@ -23,7 +20,7 @@ export default function UserView({
     return (
         <React.Fragment>
             <a href="#" onClick={toggleDetails}>
-                {gender === 'Male' ? 'Mr' : 'Ms'}. {first_name} {last_name}
+                {gender === MALE_GENDER ? 'Mr' : 'Ms'}. {userFullName(user)}
             </a>
             <div className="user-details" style={{ display: detailsVisibility ? 'block' : 'none' }}>
                 <p>Birthday: {birthday ? showDate(birthday, true) : '-'}</p>

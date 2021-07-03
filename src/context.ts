@@ -1,7 +1,5 @@
 import { createContext, useContext } from 'react';
-import { IOrder } from './models/order';
-import { IUser } from './models/user';
-import { ICompany } from './models/company';
+import { IOrder, IUser, ICompany } from './models';
 
 export type GlobalContent = {
     orders: IOrder[];

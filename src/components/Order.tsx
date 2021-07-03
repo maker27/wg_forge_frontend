@@ -1,5 +1,5 @@
 import React from 'react';
-import { IOrder } from '../models/order';
+import { IOrder } from '../models';
 import { useGlobalContext } from '../context';
 import { showCardNumber, showDate } from '../utils';
 import UserView from './UserView';

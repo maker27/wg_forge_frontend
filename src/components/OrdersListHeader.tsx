@@ -1,18 +1,21 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import { ARROW_DOWN_CHAR, ARROW_UP_CHAR } from '../assets/constants';
 
-const ArrowDown = () => <span className="text-warning"> &#8595;</span>;
-const ArrowUp = () => <span className="text-warning"> &#8593;</span>;
+const ArrowDown = () => <span className="text-warning"> {ARROW_DOWN_CHAR}</span>;
+const ArrowUp = () => <span className="text-warning"> {ARROW_UP_CHAR}</span>;
 
 export default function OrdersListHeader({
     sortingType,
     setSortingType,
     sortingOrder,
-    setSortingOrder
+    setSortingOrder,
+    setFilter
 }: {
     sortingType: string;
     setSortingType: Dispatch<SetStateAction<string>>;
     sortingOrder: boolean;
     setSortingOrder: Dispatch<SetStateAction<boolean>>;
+    setFilter: Dispatch<SetStateAction<string>>;
 }) {
     const columns: { title: string; sorting?: string }[] = [
         { title: 'Transaction ID' },
@@ -35,6 +38,12 @@ export default function OrdersListHeader({
 
     return (
         <thead>
+            <tr>
+                <th>Search:</th>
+                <th colSpan={6}>
+                    <input type="text" id="search" onChange={({ target }) => setFilter(target.value)} />
+                </th>
+            </tr>
             <tr>
                 {columns.map(({ title, sorting }, index) => (
                     <th
