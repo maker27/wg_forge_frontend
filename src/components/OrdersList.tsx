@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import Order from './Order';
 import { useGlobalContext } from '../context';
-import { IOrder } from '../models/order';
+import { IOrder, IOrderWithUser } from '../models/order';
 import './OrdersList.scss';
 import OrdersListHeader from './OrdersListHeader';
 import { IUser } from '../models/user';
-
-interface IOrderWithUser extends IOrder {
-    user: IUser;
-}
+import OrdersListFooter from './OrdersListFooter';
 
 interface ISortingFunction {
     (a: IOrderWithUser, b: IOrderWithUser): number;
@@ -64,6 +61,7 @@ export default function OrdersList() {
                     <Order key={order.id} data={order} />
                 ))}
             </tbody>
+            <OrdersListFooter orders={ordersWithUsers} />
         </table>
     );
 }

@@ -1,3 +1,5 @@
+import { IUser } from './user';
+
 export interface IOrder {
     id: number;
     transaction_id: string;
@@ -8,4 +10,8 @@ export interface IOrder {
     card_number: string;
     order_country: string;
     order_ip: string;
+}
+
+export interface IOrderWithUser extends IOrder {
+    user: IUser;
 }
