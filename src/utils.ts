@@ -30,7 +30,7 @@ export function calcMedian(arr: number[]): number {
     const minMiddle = Math.floor(length / 2);
     const maxMiddle = Math.ceil(length / 2);
     const sortedArr = arr.sort((a, b) => a - b);
-    return (sortedArr[minMiddle] + sortedArr[maxMiddle]) / 2;
+    return +((sortedArr[minMiddle] + sortedArr[maxMiddle]) / 2).toFixed(2);
 }
 
 export function calcAverage(orders: IOrderWithUser[]): { count: number; total: number; average: string } {
